@@ -5,25 +5,23 @@ import (
 	"flag"
 	"log"
 	"os"
-	"path/filepath"
 
 	"golang.org/x/exp/maps"
 )
 
-var nvimVenvDir string
+var pythonExecutable string
 
 func main() {
-	flag.StringVar(&nvimVenvDir, "venv", "", "path to the neovim virtualenv")
+	flag.StringVar(&pythonExecutable, "python-executable", "", "path to the Python executable")
 	flag.Parse()
 
-	if nvimVenvDir == "" {
+	if pythonExecutable == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
 
-	pythonBin := filepath.Join(nvimVenvDir, "bin", "python3")
-	if _, err := os.Stat(pythonBin); err != nil {
-		log.Fatalf("invalid value for -venv: %v", err)
+	if _, err := os.Stat(pythonExecutable); err != nil {
+		log.Fatalf("invalid value for -python-executable: %v", err)
 	}
 
 	var languages []Language

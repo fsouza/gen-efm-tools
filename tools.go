@@ -85,5 +85,5 @@ func getPythonBin(name string) string {
 		}
 	}
 
-	return filepath.Join(nvimVenvDir, "bin", name)
+	return filepath.Join(filepath.Dir(pythonExecutable), name)
 }
